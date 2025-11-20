@@ -22,7 +22,7 @@
             <label>
                 <strong>Kies pizza</strong>
                 <select name="vegatarian" bind:value={veggie} onchange={onChange}>
-                    <option value="">alle pizza's 🥦 & 🥩 </option>
+                    <option value="">alle pizza's </option>
                     <option value="true">vegetarische 🥦</option>
                     <option value="false">met vlees 🥩</option>
                 </select>
@@ -55,17 +55,23 @@
 
 <style>
     main {
+        --pizza-flour:#fcf4e4;
         --pizza-crust: #f5e0b7;
         --pizza-sauce: #e94f37;
         --pizza-cheese: #ffeb99;
         --pizza-veggie: #6dbf4f;
+        --pizza-mushroom:#d4a373;
         --pizza-meat: #b33a3a;
         --pizza-card-bg: var(--pizza-crust);
-        --pizza-card-border: #d4a373;
-        --pizza-card-radius: 8px;
+        --pizza-card-border: var(--pizza-mushroom);
+        --pizza-card-radius: .5rem;
 
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, serif;
         line-height:1.5;
+        background: var(--pizza-flour);
+        height:100vh;
+        width:100vw;
+        padding:1rem;
     }
 
     form {
@@ -108,6 +114,9 @@
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 1rem;
 
+        h1 {
+          color:var(--pizza-card-border)
+        }
         h1,
         form {
             grid-column: 1 / -1;
