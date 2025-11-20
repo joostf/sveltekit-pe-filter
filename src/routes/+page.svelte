@@ -28,7 +28,7 @@
         </noscript>    
     </form>
 
-    <section class="pizza's">
+    <section class="pizzas">
         <h1>Alle pizzas</h1>
         {#each data.pizzas as pizza}
             <article class="pizza-card">
