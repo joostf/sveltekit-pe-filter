@@ -1,7 +1,7 @@
 <script>
     import { goto } from '$app/navigation'
     let { data } = $props()
-    let veggie = $state(data.veg ?? "")
+    let veggie = $state(data.veggie ?? "")
     let form
 
     function onChange() {
@@ -38,10 +38,14 @@
                 <h2>{pizza.name}</h2>
                 <p>Prijs: €{pizza.price}</p>
                 <p>Besteld: {pizza.ordered}</p>
-                {#if pizza.vegatarian === true}
-                    <p class="veggie">Deze pizza is vegetarisch.</p>
-                {/if}
+                
                 {@html pizza.description}
+
+                {#if pizza.vegatarian === true}
+                    <strong>🥦</strong>
+                {:else}
+                    <strong>🥩</strong>
+                {/if}
             </article>
         {/each}
     </section>
@@ -115,6 +119,16 @@
         border: 2px solid var(--pizza-card-border);
         border-radius: var(--pizza-card-radius);
         padding: 1rem;
+        position: relative;
+
+        strong {
+            --_bg: var(--pizza-veggie);
+            position: absolute;
+            right:0.5rem;
+            top:.5rem;
+            font-size: 1.5rem;
+            
+        }
     }
 
     .pizza-card h2 {
