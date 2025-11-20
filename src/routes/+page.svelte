@@ -2,7 +2,6 @@
     import { goto } from '$app/navigation'
     let { data } = $props()
     let veggie = $state(data.veggie ?? "")
-    let form
 
     function onChange() {
         const params = new URLSearchParams()
@@ -13,12 +12,10 @@
 </script>
 
 <main>
-    
-
     <section class="pizzas">
         <h1>Nerdy pizza's</h1>
 
-        <form bind:this={form}>
+        <form>
             <label>
                 <strong>Kies pizza</strong>
                 <select name="vegatarian" bind:value={veggie} onchange={onChange}>
@@ -49,8 +46,6 @@
             </article>
         {/each}
     </section>
-
-
 </main>
 
 <style>
