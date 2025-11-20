@@ -13,23 +13,26 @@
 </script>
 
 <main>
-    <form bind:this={form}>
-        <label>
-            <strong>Kies pizza</strong>
-            <select name="vegatarian" bind:value={veggie} onchange={onChange}>
-                <option value="">alle pizza's 🥦 & 🥩 </option>
-                <option value="true">vegetarische 🥦</option>
-                <option value="false">met vlees 🥩</option>
-            </select>
-        </label>
-
-        <noscript>
-            <button type="submit">Filter pizza's</button>
-        </noscript>    
-    </form>
+    
 
     <section class="pizzas">
-        <h1>Onze pizza's</h1>
+        <h1>Nerdy pizza's</h1>
+
+        <form bind:this={form}>
+            <label>
+                <strong>Kies pizza</strong>
+                <select name="vegatarian" bind:value={veggie} onchange={onChange}>
+                    <option value="">alle pizza's 🥦 & 🥩 </option>
+                    <option value="true">vegetarische 🥦</option>
+                    <option value="false">met vlees 🥩</option>
+                </select>
+            </label>
+
+            <noscript>
+                <button type="submit">Filter pizza's</button>
+            </noscript>    
+        </form>
+
         {#each data.pizzas as pizza}
             <article class="pizza-card">
                 <h2>{pizza.name}</h2>
@@ -42,6 +45,8 @@
             </article>
         {/each}
     </section>
+
+
 </main>
 
 <style>
@@ -99,7 +104,8 @@
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 1rem;
 
-        h1 {
+        h1,
+        form {
             grid-column: 1 / -1;
         }
     }
