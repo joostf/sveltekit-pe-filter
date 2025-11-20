@@ -29,7 +29,7 @@
     </form>
 
     <section class="pizzas">
-        <h1>Alle pizzas</h1>
+        <h1>Onze pizza's</h1>
         {#each data.pizzas as pizza}
             <article class="pizza-card">
                 <h2>{pizza.name}</h2>
