@@ -6,9 +6,9 @@ export async function load({ fetch, url }) {
     const baseURL = 'https://fdnd-agency.directus.app/items/demo_pizzas'
 
     if (veggie === 'true') {
-        params.set('filter[vegatarian][_eq]', 'true');
+        params.set('filter[vegatarian][_eq]', 'true')
     } else if (veggie === 'false') {
-        params.set('filter[vegatarian][_null]', 'true');
+        params.set('filter[vegatarian][_null]', 'true')
     }
 
     const endpoint = `${baseURL}?${params.toString()}`

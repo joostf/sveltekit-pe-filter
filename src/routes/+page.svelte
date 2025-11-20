@@ -1,5 +1,5 @@
 <script>
-    import { goto } from '$app/navigation';
+    import { goto } from '$app/navigation'
     let { data } = $props()
     let veggie = $state(data.veg ?? "")
     let form
@@ -15,28 +15,28 @@
 <main>
     <form bind:this={form}>
         <label>
-            Choose pizza type
+            <strong>Kies pizza</strong>
             <select name="vegatarian" bind:value={veggie} onchange={onChange}>
-                <option value="">All pizzas</option>
-                <option value="true">Vegetarian</option>
-                <option value="false">With meat</option>
+                <option value="">alle pizza's 🥦 & 🥩 </option>
+                <option value="true">vegetarische 🥦</option>
+                <option value="false">met vlees 🥩</option>
             </select>
         </label>
 
         <noscript>
-            <button type="submit">Filter</button>
+            <button type="submit">Filter pizza's</button>
         </noscript>    
     </form>
 
-    <section class="pizzas">
-        <h1>All our pizzas</h1>
+    <section class="pizza's">
+        <h1>Alle pizzas</h1>
         {#each data.pizzas as pizza}
             <article class="pizza-card">
                 <h2>{pizza.name}</h2>
-                <p>Price: €{pizza.price}</p>
-                <p>Ordered: {pizza.ordered}</p>
+                <p>Prijs: €{pizza.price}</p>
+                <p>Besteld: {pizza.ordered}</p>
                 {#if pizza.vegatarian === true}
-                    <p class="veggie">This pizza is vegetarian.</p>
+                    <p class="veggie">Deze pizza is vegetarisch.</p>
                 {/if}
                 {@html pizza.description}
             </article>
@@ -56,21 +56,27 @@
         --pizza-card-radius: 8px;
 
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, serif;
+        line-height:1.5;
     }
 
     form {
         margin-bottom: 1rem;
     }
 
+    label {
+        display:flex;
+        align-items:center;
+        gap:.5rem;
+    }
+
     select {
-        margin-left: 0.5rem;
         padding: 0.3rem 0.5rem;
         border-radius: 4px;
         border: 1px solid #ccc;
         font-family: inherit;
         font-size: inherit;
+        width:fit-content
     }
-
 
     button {
         margin-left: 0.5rem;
@@ -80,6 +86,8 @@
         background-color: var(--pizza-sauce);
         color: white;
         cursor: pointer;
+        font-size: inherit;
+        font-family: inherit;
     }
 
     button:hover {
