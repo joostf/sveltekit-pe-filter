@@ -126,6 +126,169 @@
             </article>
         {/each}
     </section>
+
+    <section class="meta">
+        <div class="inner">
+        <h2>(Meta) Frontend Framework Features</h2>
+
+        <table>
+        <thead>
+            <tr>
+            <th>Feature</th>
+            <th>Description</th>
+            <th>Where it appears</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>URL-driven routing</td>
+            <td>Routes and data loading are defined by the URL</td>
+            <td>Folder-based routing, load()</td>
+            </tr>
+            <tr>
+            <td>Server-side rendering (SSR)</td>
+            <td>HTML is rendered on the server before sending to client</td>
+            <td>+page.server.js</td>
+            </tr>
+            <tr>
+            <td>Progressive enhancement</td>
+            <td>Core functionality works without JavaScript</td>
+            <td>HTML form + use:enhance</td>
+            </tr>
+            <tr>
+            <td>Hydration</td>
+            <td>Client activates server-rendered HTML</td>
+            <td>$props(), reactive bindings</td>
+            </tr>
+            <tr>
+            <td>Client-side state</td>
+            <td>UI feedback without page reloads</td>
+            <td>$state, conditional rendering</td>
+            </tr>
+            <tr>
+            <td>Scoped styling</td>
+            <td>Styles are isolated per component</td>
+            <td>&lt;style&gt; in component</td>
+            </tr>
+        </tbody>
+        </table>
+
+        <h2>Frameworks concepts compared</h2>
+
+        <table>
+        <thead>
+            <tr>
+            <th>Concept</th>
+            <th>SvelteKit</th>
+            <th>Next.js / React</th>
+            <th>Nuxt / Vue</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>File-based routing</td>
+            <td>+page.svelte</td>
+            <td>app/page.tsx</td>
+            <td>pages/index.vue</td>
+            </tr>
+            <tr>
+            <td>SSR data loading</td>
+            <td>load()</td>
+            <td>Server Components / getServerSideProps</td>
+            <td>useAsyncData</td>
+            </tr>
+            <tr>
+            <td>Form enhancement</td>
+            <td>use:enhance</td>
+            <td>Server Actions</td>
+            <td>Native forms + Nitro</td>
+            </tr>
+            <tr>
+            <td>Hydration</td>
+            <td>Automatic</td>
+            <td>hydrateRoot</td>
+            <td>Automatic</td>
+            </tr>
+            <tr>
+            <td>Scoped CSS</td>
+            <td>Component styles</td>
+            <td>CSS Modules</td>
+            <td>&lt;style scoped&gt;</td>
+            </tr>
+        </tbody>
+        </table>
+
+        <h2>Differences between frameworks</h2>
+
+        <table>
+        <thead>
+            <tr>
+            <th>Aspect</th>
+            <th>SvelteKit</th>
+            <th>Next.js (React)</th>
+            <th>Nuxt (Vue)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>Default mental model</td>
+            <td>Server-first, HTML-first</td>
+            <td>Component-first, client-first (historically)</td>
+            <td>Hybrid, progressive</td>
+            </tr>
+            <tr>
+            <td>Progressive enhancement</td>
+            <td>Built-in and encouraged</td>
+            <td>Possible, but not the default</td>
+            <td>Supported, but often abstracted</td>
+            </tr>
+            <tr>
+            <td>Form handling</td>
+            <td>Native HTML forms + server actions</td>
+            <td>Server Actions or API routes</td>
+            <td>Server routes or composables</td>
+            </tr>
+            <tr>
+            <td>Hydration strategy</td>
+            <td>Automatic, minimal JavaScript</td>
+            <td>Automatic, often heavier bundles</td>
+            <td>Automatic, configurable</td>
+            </tr>
+            <tr>
+            <td>Client state philosophy</td>
+            <td>Local, minimal, reactive</td>
+            <td>Explicit hooks and stores</td>
+            <td>Refs, reactive objects</td>
+            </tr>
+            <tr>
+            <td>Rendering control</td>
+            <td>Per route (SSR, CSR, static)</td>
+            <td>Per page or component</td>
+            <td>Per page or layout</td>
+            </tr>
+            <tr>
+            <td>CSS scoping</td>
+            <td>Automatic per component</td>
+            <td>Manual (CSS Modules, styled)</td>
+            <td>Built-in via &lt;style scoped&gt;</td>
+            </tr>
+            <tr>
+            <td>Learning curve</td>
+            <td>Low to medium</td>
+            <td>Medium to high</td>
+            <td>Medium</td>
+            </tr>
+            <tr>
+            <td>Framework abstraction level</td>
+            <td>Thin layer over web standards</td>
+            <td>Thicker abstraction</td>
+            <td>Moderate abstraction</td>
+            </tr>
+        </tbody>
+        </table>
+
+    </div>
+    </section>
 </main>
 
 <style>
@@ -136,23 +299,18 @@
     */
 
     main {
-        --pizza-flour:#fcf4e4;
-        --pizza-crust: #f5e0b7;
-        --pizza-sauce: #e94f37;
-        --pizza-cheese: #ffeb99;
-        --pizza-veggie: #6dbf4f;
-        --pizza-mushroom:#d4a373;
-        --pizza-meat: #b33a3a;
-        --pizza-card-bg: var(--pizza-crust);
-        --pizza-card-border: var(--pizza-mushroom);
-        --pizza-card-radius: .5rem;
-
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, serif;
-        line-height:1.5;
-        background: var(--pizza-flour);
-        height:100vh;
-        width:100vw;
         padding:1rem;
+    }
+
+    section.meta {
+        margin: 4rem -1rem -1rem;
+        padding:2rem 0;
+        background-color: var(--pizza-crust);
+    }
+
+    .inner {
+        max-width: 1100px;
+        margin: 0 auto;
     }
 
     form {
@@ -234,5 +392,75 @@
 
     .pizza-card p {
         margin: 0.3rem 0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2rem 0 4rem;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 0.95rem;
+    }
+
+    thead {
+        background-color: var(--pizza-sauce);
+        color:#fff
+    }
+
+    thead th {
+        text-align: left;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        border-bottom: 2px solid #111;
+        width:calc(100 / sibling-count() * 1%);
+    }
+
+    tbody td {
+        padding: 0.75rem 1rem;
+        vertical-align: top;
+        border-bottom: 1px solid #111;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    tbody tr:hover {
+        background-color: var(--pizza-sauce);
+        color:#fff;
+    }
+
+    th,
+    td {
+        line-height: 1.4;
+    }
+
+    @media (max-width: 700px) {
+        table {
+        font-size: 0.9rem;
+        }
+
+        thead {
+        display: none;
+        }
+
+        tbody tr {
+        display: block;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid #e5e7eb;
+        }
+
+        tbody td {
+        display: block;
+        padding: 0.5rem 0;
+        }
+
+        tbody td::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: #555;
+        }
     }
 </style>
