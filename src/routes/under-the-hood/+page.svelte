@@ -1,12 +1,68 @@
 <script>
     import { goto } from '$app/navigation'
+
+    /*
+        Hydration (client takes over server-rendered HTML):
+
+        1. Server-side rendering (SSR):
+
+        - The server generates the full HTML page with all pizza data.
+        - This HTML is sent to the browser.
+        - User sees content immediately, even before any JavaScript runs.
+        - This improves performance and SEO.
+
+        2. DOMContentLoaded (browser event):
+
+            - Fires when the initial HTML document is completely loaded and parsed.
+            - At this point, the DOM exists, but external resources (images, CSS) may still be loading.
+            - Browser can now attach JavaScript behaviors safely.
+
+        3. Svelte hydration / client-side rendering (CSR):
+
+            - Svelte’s JS bundle loads after the HTML.
+            - Hydration process:
+                a. Attaches reactive bindings (like `bind:value={veggie}`).
+                b. Attaches event listeners (like `onchange={onChange}`).
+                c. Connects the existing server-rendered DOM to Svelte's reactive system.
+            - **Important:** HTML is **not replaced**, only enhanced with interactivity.
+            - After hydration, the page behaves like a fully client-side Svelte app.
+
+    */
     let { data } = $props()
+
+    /*
+        Client-side state:
+
+        - This state controls the UI
+        - It is initialized from server data
+        - After hydration, it lives only in the browser
+    */
     let veggie = $state(data.veggie ?? "")
 
     function onChange() {
-        const params = new URLSearchParams()
-        if (veggie !== "") params.set("vegatarian", veggie)
+        /*
+            Navigation API + URL Driven Development:
 
+            - Update the URL when the select changes
+            - The URL represents application state
+            - No manual data fetching on the client
+        */
+
+        const params = new URLSearchParams()
+
+        if (veggie !== "") {
+            params.set("vegatarian", veggie)
+        }
+
+        /*
+          goto() under the hood:
+
+          - Updates the browser URL (History API)
+          - Triggers a navigation
+          - Re-runs the server load() function
+          - New HTML + data are returned
+          - Page updates without full reload
+        */
         goto(`?${params.toString()}`)
     }
 </script>
@@ -15,27 +71,53 @@
     <section class="pizzas">
         <h1>Nerdy pizza's</h1>
 
+        <!--
+          Progressive Enhancement:
+
+          - With JavaScript: onchange + goto()
+          - Without JavaScript: <noscript> fallback
+          - Same URL-based behavior in both cases
+        -->
         <form>
             <label>
                 <strong>Kies pizza</strong>
-                <select name="vegatarian" bind:value={veggie} onchange={onChange}>
-                    <option value="">alle pizza's </option>
+                <select
+                    name="vegatarian"
+                    bind:value={veggie}
+                    onchange={onChange}
+                >
+                    <option value="">alle pizza's</option>
                     <option value="true">vegetarische 🥦</option>
                     <option value="false">met vlees 🥩</option>
                 </select>
             </label>
 
-            <button type="submit">Filter pizza's</button>  
+            <!--
+              No-JavaScript fallback:
+
+              - Browser performs a normal form submit
+              - URL query parameter is sent
+              - Server load() handles filtering
+            -->
+
+            <button type="submit">Filter pizza's</button>
         </form>
 
+        <!--
+          Declarative rendering:
+
+          - UI is derived from data state
+          - No manual DOM manipulation
+        -->
         {#each data.pizzas as pizza}
             <article class="pizza-card">
                 <h2>{pizza.name}</h2>
                 <p>Prijs: €{pizza.price}</p>
                 <p>Besteld: {pizza.ordered}</p>
-                
+
                 {@html pizza.description}
 
+                <!-- Conditional rendering based on data / state -->
                 {#if pizza.vegatarian === true}
                     <strong>🥦</strong>
                 {:else}
@@ -47,6 +129,12 @@
 </main>
 
 <style>
+    /*
+      Scoped CSS:
+
+      - Styles apply only to this component
+    */
+
     main {
         --pizza-flour:#fcf4e4;
         --pizza-crust: #f5e0b7;
