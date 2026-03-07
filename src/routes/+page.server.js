@@ -61,7 +61,7 @@ export async function load({ fetch, url }) {
       - The client will later hydrate this data
     */
     return {
-        pizzas: json.data ?? [],
+        pizzas: json.data ?? [], //short circuiting
         veggie
     }
 }
