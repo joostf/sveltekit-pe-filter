@@ -314,7 +314,7 @@
         }
     }
     section {
-        
+        padding:1rem;
 
         @media (min-width: 75em) {
             padding:1rem;
