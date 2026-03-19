@@ -37,7 +37,7 @@
         - It is initialized from server data
         - After hydration, it lives only in the browser
     */
-    let veggie = $state(data.veggie ?? "")
+    let type = $state(data.type ?? "")
 
     function onChange() {
         /*
@@ -50,8 +50,8 @@
 
         const params = new URLSearchParams()
 
-        if (veggie !== "") {
-            params.set("vegatarian", veggie)
+        if (type !== "") {
+            params.set("type", type)
         }
 
         /*
@@ -82,13 +82,14 @@
             <label>
                 <strong>Kies pizza</strong>
                 <select
-                    name="vegatarian"
-                    bind:value={veggie}
+                    name="type"
+                    bind:value={type}
                     onchange={onChange}
                 >
                     <option value="">alle pizza's</option>
-                    <option value="true">vegetarische 🥦</option>
-                    <option value="false">met vlees 🥩</option>
+                    <option value="vegetarisch">vegetarische 🥦</option>
+                    <option value="vlees">met vlees 🥩</option>
+                    <option value="vis">met vis 🐟</option>
                 </select>
             </label>
 
@@ -118,11 +119,15 @@
                 {@html pizza.description}
 
                 <!-- Conditional rendering based on data / state -->
-                {#if pizza.vegatarian === true}
+                {#if pizza.type === 'vegetarisch'}
                     <strong>🥦</strong>
-                {:else}
+                {:else if pizza.type === 'vlees'}
                     <strong>🥩</strong>
+                {:else}
+                    <strong>🐟</strong>
                 {/if}
+
+                
             </article>
         {/each}
     </section>
