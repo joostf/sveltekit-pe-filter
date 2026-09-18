@@ -45,7 +45,7 @@
   }
 
   /*
-    In this script:
+    Code flow when a user changes a filter or submits the form:
     1. handleChange() submits the form when a filter changes.
     2. handleSubmit() prevents a full browser reload and calls fetchAndRender().
     3. buildFilterUrl() converts the form values into a URL such as /pizzas?type=vis.
