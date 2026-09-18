@@ -5,8 +5,10 @@
   let { data } = $props()
 </script>
 
-<SiteHeader />
-<main><PizzaList pizzas={data.pizzas} title="Populairste nerdy pizza's" /></main>
+<svelte:head><title>Alle nerdy pizza's | Nerdy Pizzas</title></svelte:head>
+
+<SiteHeader selectedType={data.selectedType} selectedSort={data.selectedSort} />
+<main><PizzaList {...data} /></main>
 
 <style>
   main {

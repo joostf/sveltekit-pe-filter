@@ -1,12 +1,14 @@
 <script>
-  import PizzaList from '$lib/components/PizzaList.svelte'
+  import PizzaCard from '$lib/components/PizzaCard.svelte'
   import SiteHeader from '$lib/components/SiteHeader.svelte'
 
   let { data } = $props()
 </script>
 
+<svelte:head><title>{data.pizza.name} | Nerdy Pizzas</title></svelte:head>
+
 <SiteHeader />
-<main><PizzaList pizzas={data.pizzas} title="Populairste nerdy pizza's" /></main>
+<main><PizzaCard pizza={data.pizza} showDetail /></main>
 
 <style>
   main {
