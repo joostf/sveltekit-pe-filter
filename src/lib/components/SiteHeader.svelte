@@ -45,15 +45,17 @@
   }
 
   /*
-    Code flow when a user changes a filter or submits the form:
+    Code flow when a user changes a filter or navigates with browser history:
     1. handleChange() submits the form when a filter changes.
     2. handleSubmit() prevents a full browser reload and calls fetchAndRenderPizzas().
     3. buildFilterUrl() converts the form values into a URL such as /pizzas?type=vis.
     4. fetchAndRenderPizzas() calls goto().
-    5. goto() performs SvelteKit client-side navigation. Because the URL changes, SvelteKit runs the server load function in pizzas/+page.server.js.
-    6. The new result becomes the data prop in pizzas/+page.svelte.
-    7. The page passes the new values to SiteHeader and PizzaList.
-    8.Svelte updates the affected DOM automatically (reactive state).
+    5. goto() performs SvelteKit client-side navigation and updates the URL with history.pushState().
+    6. Because the URL changes, SvelteKit runs the server load function in pizzas/+page.server.js.
+    7. The new result becomes the data prop in pizzas/+page.svelte.
+    8. The page passes the new values to SiteHeader and PizzaList.
+    9. Svelte updates the affected DOM automatically through reactive state.
+    10. When the user goes back or forward, SvelteKit handles popstate, runs the load function again, and updates the page data and filter values automatically.
   */
 </script>
 
