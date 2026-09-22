@@ -6,15 +6,4 @@
 </script>
 
 <SiteHeader selectedType={data.selectedType} selectedSort={data.selectedSort} />
-<main><PizzaList {...data} /></main>
-
-<style>
-  main {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    width: min(100%, 96rem);
-    margin-inline: auto;
-    padding-bottom: 1rem;
-  }
-</style>
+<PizzaList {...data} />
