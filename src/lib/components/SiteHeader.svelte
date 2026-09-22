@@ -5,39 +5,31 @@
   let isLoading = $state(false)
 
   async function fetchAndRenderPizzas(url) {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    if (document.startViewTransition && !prefersReducedMotion) {
-      await document.startViewTransition(() => goto(url, { keepFocus: true, noScroll: true })).finished
-      return
-    }
-
     await goto(url, { keepFocus: true, noScroll: true })
   }
 
-  async function handleSubmit(event) {
-    event.preventDefault()
+  async function handleSubmit({preventDefault, currentTarget}) {
+    preventDefault()
     isLoading = true
 
     try {
-      await fetchAndRenderPizzas(buildFilterUrl(event.currentTarget))
+      const url = buildFilterUrl(currentTarget)
+      await fetchAndRenderPizzas(url)
     } finally {
       isLoading = false
     }
   }
 
-  function handleChange(event) {
-    const select = event.currentTarget
-    select.form?.requestSubmit()
+  function handleChange({currentTarget}) {
+    const select = currentTarget
+    select.form.requestSubmit()
   }
 
   function buildFilterUrl(form) {
     const params = new URLSearchParams()
     const formData = new FormData(form)
 
-    formData.forEach((value, key) => {
-      if (typeof value === 'string') params.set(key, value)
-    })
+    formData.forEach((value, key) => params.set(key, value))
 
     const query = params.toString()
 
