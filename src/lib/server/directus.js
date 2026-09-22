@@ -2,9 +2,6 @@ import { error } from '@sveltejs/kit'
 
 const BASE_URL = 'https://fdnd-agency.directus.app/items'
 
-/**
- * @param {{ type?: string, price?: string, limit?: number, slug?: string }} options
- */
 export function createQuery({ type = '', price = '', limit, slug = '' } = {}) {
   const params = new URLSearchParams()
 
@@ -25,10 +22,6 @@ export function createQuery({ type = '', price = '', limit, slug = '' } = {}) {
   return params
 }
 
-/**
- * @param {typeof globalThis.fetch} fetch
- * @param {URLSearchParams} params
- */
 export async function fetchPizzas(fetch, params) {
   const response = await fetch(`${BASE_URL}/demo_pizzas?${params.toString()}`)
 
