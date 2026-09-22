@@ -15,19 +15,20 @@
     await goto(url, { keepFocus: true, noScroll: true })
   }
 
-  async function handleSubmit(event) {
-    event.preventDefault()
+  async function handleSubmit({preventDefault, currentTarget}) {
+    preventDefault()
     isLoading = true
 
     try {
-      await fetchAndRenderPizzas(buildFilterUrl(event.currentTarget))
+      const url = buildFilterUrl(currentTarget)
+      await fetchAndRenderPizzas(url)
     } finally {
       isLoading = false
     }
   }
 
-  function handleChange(event) {
-    const select = event.currentTarget
+  function handleChange({currentTarget}) {
+    const select = currentTarget
     select.form?.requestSubmit()
   }
 
@@ -35,10 +36,8 @@
     const params = new URLSearchParams()
     const formData = new FormData(form)
 
-    formData.forEach((value, key) => {
-      if (typeof value === 'string') params.set(key, value)
-    })
-
+    formData.forEach((value, key) => params.set(key, value))
+    
     const query = params.toString()
 
     return query ? `/pizzas?${query}` : '/pizzas'
