@@ -15,20 +15,20 @@
     await goto(url, { keepFocus: true, noScroll: true })
   }
 
-  async function handleSubmit({preventDefault, currentTarget}) {
-    preventDefault()
+  async function handleSubmit(event) {
+    event.preventDefault()
     isLoading = true
 
     try {
-      const url = buildFilterUrl(currentTarget)
+      const url = buildFilterUrl(event.currentTarget)
       await fetchAndRenderPizzas(url)
     } finally {
       isLoading = false
     }
   }
 
-  function handleChange({currentTarget}) {
-    const select = currentTarget
+  function handleChange(event) {
+    const select = event.currentTarget
     select.form?.requestSubmit()
   }
 
