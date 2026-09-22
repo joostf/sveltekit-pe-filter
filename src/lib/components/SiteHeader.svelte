@@ -122,16 +122,9 @@
   header {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    width: min(100%, 96rem);
-    margin-inline: auto;
-
-    @container (min-width: 60rem) {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+    align-items: start;
+    /* width: min(100%, 96rem); */
+    /* margin-inline: auto; */
   }
 
   nav {
@@ -141,7 +134,7 @@
       display: flex;
       gap: 1rem;
       list-style: none;
-      margin: 0;
+      margin: 1em -.5rem;
       padding: 0;
     }
 
@@ -149,8 +142,9 @@
       display: flex;
       align-items: center;
       gap: .25rem;
-      padding: .75rem .5rem;
+      padding: .5rem;
       border: 1px solid transparent;
+      border-radius:.5rem;
 
       &:hover { color: var(--pizza-red); }
     }
@@ -176,7 +170,6 @@
       width: auto;
       flex-direction: row;
       align-items: end;
-      margin: 2rem 0;
       padding: .5rem 1rem;
     }
   }

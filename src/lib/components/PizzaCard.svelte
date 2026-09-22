@@ -4,6 +4,7 @@
   let { pizza, showDetail = false, entryIndex = 0 } = $props()
 </script>
 
+
 <article class:show-detail={showDetail} style={`view-transition-name: pizza-${pizza.id}; view-transition-class: pizza; --pizza-entry-delay: ${entryIndex * 40}ms;`}>
   {#if pizza.image}
     <img src={assetUrl(pizza.image, { width: 300 })} alt={pizza.name} width="300" height="300" />
@@ -20,6 +21,7 @@
     <p>Prijs: <data value={pizza.price}>€ {Number(pizza.price).toFixed(2).replace('.', ',')}</data></p>
   </footer>
 </article>
+
 
 <style>
   article {
@@ -56,9 +58,7 @@
         gap: 1rem 3rem;
       }
     }
-  }
 
-  article {
     img {
       width: calc(100% + 2rem);
       aspect-ratio: 1;
@@ -81,10 +81,8 @@
         margin: -1rem 0 -.5rem -1rem;
       }
     }
-  }
 
-  @media (prefers-reduced-motion: no-preference) {
-    article {
+    @media (prefers-reduced-motion: no-preference) {
       &:not(.show-detail) {
         animation: pizza-enter .4s ease-in both;
         animation-delay: var(--pizza-entry-delay, 0ms);
