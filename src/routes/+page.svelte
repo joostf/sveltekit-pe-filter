@@ -3,18 +3,9 @@
   import SiteHeader from '$lib/components/SiteHeader.svelte'
 
   let { data } = $props()
+
+  const { pizzas } = $derived(data)
 </script>
 
 <SiteHeader />
-<main><PizzaList pizzas={data.pizzas} title="Populairste nerdy pizza's" /></main>
-
-<style>
-  main {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    width: min(100%, 96rem);
-    margin-inline: auto;
-    padding-bottom: 1rem;
-  }
-</style>
+<PizzaList {pizzas} title="Populairste nerdy pizza's" />
