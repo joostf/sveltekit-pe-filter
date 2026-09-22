@@ -65,9 +65,7 @@
           gap: 1rem 3rem;
         }
       }
-    }
 
-    article {
       img {
         width: calc(100% + 2rem);
         aspect-ratio: 1;
@@ -90,10 +88,8 @@
           margin: -1rem 0 -.5rem -1rem;
         }
       }
-    }
 
-    @media (prefers-reduced-motion: no-preference) {
-      article {
+      @media (prefers-reduced-motion: no-preference) {
         &:not(.show-detail) {
           animation: pizza-enter .4s ease-in both;
           animation-delay: var(--pizza-entry-delay, 0ms);
@@ -101,4 +97,5 @@
       }
     }
   }
+
 </style>
