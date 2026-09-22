@@ -6,7 +6,7 @@
 
 <article class:show-detail={showDetail} style={`view-transition-name: pizza-${pizza.id}; view-transition-class: pizza; --pizza-entry-delay: ${entryIndex * 40}ms;`}>
   {#if pizza.image}
-    <img src={assetUrl(pizza.image)} alt={pizza.name} width="300" height="300" />
+    <img src={assetUrl(pizza.image, { width: 300 })} alt={pizza.name} width="300" height="300" />
   {/if}
 
   <header><h2>{pizza.name}</h2></header>
