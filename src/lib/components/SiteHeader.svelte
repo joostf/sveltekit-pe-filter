@@ -1,62 +1,5 @@
 <script>
-  import { goto } from '$app/navigation'
-
   let { selectedType = '', selectedSort = '' } = $props()
-  let isLoading = $state(false)
-
-  async function fetchAndRenderPizzas(url) {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    if (document.startViewTransition && !prefersReducedMotion) {
-      await document.startViewTransition(() => goto(url, { keepFocus: true, noScroll: true })).finished
-      return
-    }
-
-    await goto(url, { keepFocus: true, noScroll: true })
-  }
-
-  async function handleSubmit(event) {
-    event.preventDefault()
-    isLoading = true
-
-    try {
-      await fetchAndRenderPizzas(buildFilterUrl(event.currentTarget))
-    } finally {
-      isLoading = false
-    }
-  }
-
-  function handleChange(event) {
-    const select = event.currentTarget
-    select.form?.requestSubmit()
-  }
-
-  function buildFilterUrl(form) {
-    const params = new URLSearchParams()
-    const formData = new FormData(form)
-
-    formData.forEach((value, key) => {
-      if (typeof value === 'string') params.set(key, value)
-    })
-
-    const query = params.toString()
-
-    return query ? `/pizzas?${query}` : '/pizzas'
-  }
-
-  /*
-    Code flow when a user changes a filter or navigates with browser history:
-    1. handleChange() submits the form when a filter changes.
-    2. handleSubmit() prevents a full browser reload and calls fetchAndRenderPizzas().
-    3. buildFilterUrl() converts the form values into a URL such as /pizzas?type=vis.
-    4. fetchAndRenderPizzas() calls goto().
-    5. goto() performs SvelteKit client-side navigation and updates the URL with history.pushState().
-    6. Because the URL changes, SvelteKit runs the server load function in pizzas/+page.server.js.
-    7. The new result becomes the data prop in pizzas/+page.svelte.
-    8. The page passes the new values to SiteHeader and PizzaList.
-    9. Svelte updates the affected DOM automatically through reactive state.
-    10. When the user goes back or forward, SvelteKit handles popstate, runs the load function again, and updates the page data and filter values automatically.
-  */
 </script>
 
 <header>
@@ -88,10 +31,10 @@
     </ul>
   </nav>
 
-  <form action="/pizzas" method="GET" onsubmit={handleSubmit} aria-busy={isLoading}>
+  <form action="/pizzas" method="GET">
     <label>
       Filter op soort
-      <select name="type" onchange={handleChange} disabled={isLoading}>
+      <select name="type">
         <option value="" selected={selectedType === ''}>alle pizza's</option>
         <option value="vegetarisch" selected={selectedType === 'vegetarisch'}>vegetarisch</option>
         <option value="vlees" selected={selectedType === 'vlees'}>vlees</option>
@@ -101,20 +44,15 @@
 
     <label>
       Sorteer op prijs
-      <select name="price" onchange={handleChange} disabled={isLoading}>
+      <select name="price">
         <option value="" selected={selectedSort === ''}>kies een volgorde</option>
         <option value="low-high" selected={selectedSort === 'low-high'}>laagste prijs</option>
         <option value="high-low" selected={selectedSort === 'high-low'}>hoogste prijs</option>
       </select>
     </label>
 
-    <button type="submit" disabled={isLoading}>
-      {#if isLoading}
-        <span class="loader" aria-hidden="true"></span>
-        Laden...
-      {:else}
+    <button type="submit">
         Filter
-      {/if}
     </button>
   </form>
 </header>

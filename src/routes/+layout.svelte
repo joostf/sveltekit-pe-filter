@@ -5,6 +5,7 @@
 </script>
 
 <svelte:head>
+  <title>Nerdy Pizzas</title>    
 	<link rel="icon" href={favicon} />
 </svelte:head>
 

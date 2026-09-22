@@ -5,7 +5,8 @@
   let { data } = $props()
 
   const { pizzas } = $derived(data)
+  const title = "Populairste nerdy pizza's"
 </script>
 
 <SiteHeader />
-<PizzaList {pizzas} title="Populairste nerdy pizza's" />
+<PizzaList {title} {pizzas} />
