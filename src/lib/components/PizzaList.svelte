@@ -46,8 +46,6 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    width: min(100%, 96rem);
-    margin-inline: auto;
     padding-bottom: 1rem;
 
     header {
@@ -56,6 +54,7 @@
       h1 {
         font-size: clamp(1.35rem, 4vw, 3rem);
         font-weight: 100;
+        margin-left: -2px;
 
         small { font-size: 1rem; }
       }
