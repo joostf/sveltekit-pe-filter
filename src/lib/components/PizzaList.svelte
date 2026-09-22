@@ -23,11 +23,13 @@
 
 <main>
   <header>
-    <h1>{title} {#if meta.total_count}<small>{meta.filter_count} / {meta.total_count}</small>{/if}</h1>
-    <p>
-      {#if typeLabels[selectedType]}<span>{typeLabels[selectedType]}</span>{/if}
-      {#if sortLabels[selectedSort]}<span>{selectedType ? '/ ' : ''}{sortLabels[selectedSort]}</span>{/if}
-    </p>
+    <h1>{title} 
+      <small>
+        {#if meta.total_count}{meta.filter_count} van {meta.total_count}{/if} 
+        {#if typeLabels[selectedType]}<span>/ {typeLabels[selectedType]}</span>{/if} 
+        {#if sortLabels[selectedSort]}<span>{selectedType ? '/ ' : ''}{sortLabels[selectedSort]}</span>{/if}
+      </small>
+    </h1>
   </header>
 
   {#if pizzas.length}
