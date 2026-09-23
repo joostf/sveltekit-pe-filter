@@ -10,3 +10,4 @@
 
 <SiteHeader />
 <PizzaList {title} {pizzas} />
+
